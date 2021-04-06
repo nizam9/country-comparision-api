@@ -3,4 +3,4 @@
     stdout:
       enabled: true
       level: debug
-  env: prod
+  env: production
