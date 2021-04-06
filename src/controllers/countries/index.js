@@ -27,8 +27,31 @@ function routes(app, rootUrl) {
     *
     * @apiError (Error 500) InternalServerError Returned if there was a server error
     */
-  app.get({ url: fullRootUrl + '/countries' },
-    controller.getCountries);
+  app.get({ url: fullRootUrl + '/countries' }, controller.getCountries);
+
+  /**
+    * @apiVersion 1.0.0
+    * @api {get} /population
+    * @apiGroup population
+    * @apiName fetch population by countryname and date
+    * @apiDescription Returns an array of data with date, population and country
+    * @apiSampleRequest /api/v1/population/Brazil,India,China/2018-12-24/-1
+    * @params countries , date , sort
+    * @apiSuccess {json} Array of all population details
+    * @apiSuccessExample {json} Success-Response:
+    *   HTTP/1.1 200 OK
+    * [{
+        "total_population": {
+            "date": "2018-12-24",
+            "population": 1365613479,
+            "country": "India"
+        }
+    * }]
+    *
+    * @apiError (Error 500) InternalServerError Returned if there was a server error
+    */
+  app.get({ url: fullRootUrl + '/population/:countries/:date/:sort' },
+    controller.getPopulation);
 }
 
 module.exports = {

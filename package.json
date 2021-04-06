@@ -26,6 +26,7 @@
     "co": "^4.6.0",
     "everyconfig": "^1.0.2",
     "fs-promise": "^1.0.0",
+    "node-fetch": "^2.6.1",
     "restify": "^8.1.0",
     "restify-errors": "^7.0.0",
     "restify-plugins": "^1.6.0",
