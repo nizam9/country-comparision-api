@@ -7,6 +7,26 @@ const argv = require('yargs').argv;
 
 const logger = require('./lib/logger')();
 
+/**
+ * The following code can be used for scalability , when we have 1000's of requests coming to our server ,
+ * we can make use of vertical scaling (creating master, worker processes depending on no. of cpu cores in a machine) 
+ * 
+ * const OS = require('os');
+const cluster = require('cluster');
+
+const cpus = OS.cpus().length;
+console.log(cpus, 'cpuscpus');
+if (cluster.isMaster) {
+  for (let i = 0; i < cpus; i++) {
+    cluster.fork();
+  }
+} else {
+  require('./server.js') // call main file
+}
+ */
+
+
+
 let port = argv.port || process.env.PORT || config.port || 3000;
 let environment = process.env.NODE_ENV || 'dev';
 
@@ -16,6 +36,7 @@ let app = restify.createServer({
   version: pjson.version,
   log: logger
 });
+app.pre(restify.pre.sanitizePath());
 
 app.acceptable = config.accept;
 app.use(plugins.acceptParser(app.acceptable));

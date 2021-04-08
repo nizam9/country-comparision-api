@@ -1,6 +1,0 @@
----
-  logging:
-    stdout:
-      enabled: true
-      level: debug
-  env: production

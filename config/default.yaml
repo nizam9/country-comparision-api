@@ -11,4 +11,4 @@
       level: debug
   port: 3000
   env: dev
-  api_host: 'https://1d6wn6bmjj722w.population.io:443/1.0'
+  api_host: 'https://d6wn6bmjj722w.population.io:443/1.0'

@@ -1,6 +1,8 @@
 'use strict';
 
-const controller = require('./countries.controller');
+const countriesController = require('./countries.controller');
+const populationController = require('./population.controllers');
+
 
 function routes(app, rootUrl) {
   // include api version number
@@ -27,7 +29,7 @@ function routes(app, rootUrl) {
     *
     * @apiError (Error 500) InternalServerError Returned if there was a server error
     */
-  app.get({ url: fullRootUrl + '/countries' }, controller.getCountries);
+  app.get({ url: fullRootUrl + '/countries' }, countriesController.getCountries);
 
   /**
     * @apiVersion 1.0.0
@@ -50,8 +52,19 @@ function routes(app, rootUrl) {
     *
     * @apiError (Error 500) InternalServerError Returned if there was a server error
     */
-  app.get({ url: fullRootUrl + '/population/:countries/:date/:sort' },
-    controller.getPopulation);
+   
+  app.get({ url: fullRootUrl + '/population/:countries/:date/:sort' },populationController.getPopulation);
+  app.get({ url: fullRootUrl + '/population/:countries/:date' },populationController.getPopulation);
+  app.get({ url: fullRootUrl + '/population/:countries' },populationController.getPopulation);
+
+  /**
+   * 
+   * Sample request urls
+   * 1. http://localhost:3000/api/v1/countries
+   * 2. http://localhost:3000/api/v1/population/Brazil,Bhutan,Nepal,India/2016-04-07/-1
+   * 3. http://localhost:3000/api/v1/population/Brazil,Bhutan,Nepal,India/2016-04-07
+   * 4. http://localhost:3000/api/v1/population/Brazil,Bhutan,Nepal,India
+   */
 }
 
 module.exports = {
